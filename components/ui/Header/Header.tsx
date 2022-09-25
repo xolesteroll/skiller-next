@@ -5,7 +5,7 @@ import Link from "next/link";
 const Header = () => {
     return (
         <header className={s.header}>
-            <div className={"main-container"}>
+            <div className="main-container">
                 <div className={s.headerInner}>
                     <div className={s.headerLogo}>
                         <img src={logo.src} alt="main site logo"/>
@@ -23,14 +23,14 @@ const Header = () => {
                                 <Link href="/services">Services</Link>
                             </li>
                             <li className={s.headerNavItem}>
-                                <Link href="/join">Join Us</Link>
+                                <Link href="/skills">Skills</Link>
                             </li>
                         </ul>
                     </nav>
 
 
-                    <div className="header-controls">
-                        <ul className="header-controls-auth">
+                    <div className={s.headerControls}>
+                        <ul className={s.headerControlsAuth}>
                             <li><Link href="/auth">Sign In / Sign Up</Link></li>
                             <li><Link href="/account">My account</Link></li>
                             <li>
@@ -41,7 +41,7 @@ const Header = () => {
                 </div>
 
             </div>
-            <div className="header-bottom">
+            <div className={s.headerBottom}>
                 {/*<app-header-slogan></app-header-slogan>*/}
             </div>
         </header>
