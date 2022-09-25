@@ -1,0 +1,15 @@
+@import "./styles/colors.module";
+
+.header {
+  background-color: $main-yellow;
+  &Inner {
+    display: flex;
+    justify-content: space-between;
+  }
+  &Logo {
+    img {
+      max-width: 200px;
+      width: 100%;
+    }
+  }
+}
