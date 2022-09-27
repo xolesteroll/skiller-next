@@ -35,12 +35,12 @@ export class SkillsResolver {
         ]
     }
 
-    // @Query(returns => Skill)
-    // async skill(): Promise<Skill> {
-    //     return {
-    //         id: 1, title: 'first Skill'
-    //     }
-    // }
+    @Query(returns => Skill)
+    async skill(): Promise<Skill> {
+        return {
+            id: 1, title: 'first Skill'
+        }
+    }
 }
 
 const schema = await buildSchema({
@@ -52,16 +52,15 @@ const server = new ApolloServer({
     schema
 })
 
+const startServer = server.start()
+
+export default async function handler(req: MicroRequest, res: ServerResponse<IncomingMessage>) {
+    await startServer
+    await server.createHandler({path: "/api/graphql"})(req, res)
+}
+
 export const config = {
     api: {
         bodyParser: false
     }
-}
-
-const startServer = server.start()
-
-export default async function handler(req: MicroRequest, res: ServerResponse<IncomingMessage>) {
-    res.setHeader('access-control-allow-origin', 'https://studio.apollographql.com')
-    await startServer
-    await server.createHandler({path: "/api/graphql"})(req, res)
 }
