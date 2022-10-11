@@ -11,21 +11,23 @@ datasource db {
 }
 
 model User {
-  id         Int    @id @default(autoincrement())
+  id         String    @id @default(uuid())
   email      String @unique
   firstName  String
   secondName String
   role       Role   @default(USER)
+  skills    Skill[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-// model Skill {
-//   id          Int    @id @default(autoincrement())
-//   name        String @unique
+model Skill {
+   id          String    @id @default(uuid())
+   title        String @unique
+   skillers User[]
 //   skillers User[] @relation(fields: [: [skillersIds], references: [id]])
 //   skillersIds Int[]
-// }
+ }
 
 enum Role {
   USER

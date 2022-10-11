@@ -1,7 +1,7 @@
 import s from "./Header.module.scss";
-import logo from "../../../public/images/skiller-logo-transparent.png";
+import logo from "../../../../public/images/skiller-logo-transparent.png";
 import Link from "next/link";
-import Container from "../Container/Container";
+import Container from "../../Container/Container";
 
 const Header = () => {
   return (
@@ -9,7 +9,7 @@ const Header = () => {
       <Container>
         <div className={s.headerInner}>
           <div className={s.headerLogo}>
-            <Link href="/">
+            <Link href="/pages">
               <a>
                 <img src={logo.src} alt="main site logo" />
               </a>
@@ -19,7 +19,7 @@ const Header = () => {
           <nav className={s.headerNav}>
             <ul className={s.headerNavMenu}>
               <li className={s.headerNavItem}>
-                <Link className={s.headerNavLink} href="/">
+                <Link className={s.headerNavLink} href="/pages">
                   Home
                 </Link>
               </li>
@@ -34,7 +34,7 @@ const Header = () => {
                 </Link>
               </li>
               <li className={s.headerNavItem}>
-                <Link className={s.headerNavLink} href="/skills">
+                <Link className={s.headerNavLink} href="/main/skills">
                   Skills
                 </Link>
               </li>
