@@ -39,6 +39,9 @@ body {
   line-height: 21px;
   font-weight: 400;
   color: $main-text-color;
+  overflow-y: hidden;
+  max-height: 100vh;
+  height: 100%;
 }
 
 a {

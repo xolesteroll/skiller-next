@@ -3,15 +3,15 @@ import s from '../../../styles/Skills.module.scss'
 import Container from "../../../components/ui/Container/Container";
 import GridWrapper from "../../../components/ui/GridWrapper/GridWrapper";
 import Sidebar from "../../../components/ui/Sidebar/Sidebar";
-import SkillItem from "../../../components/skills/SkillItem/SkillItem";
 import {GetSkillsQuery} from "../../../src/graphql/queries/skills.queries";
-import {Skill} from "../../../src/graphql/schema/skills/skills.typeDef";
 import {useQuery} from "@apollo/client";
+import SkillsGrid from "../../../components/skills/SkillsGrid/SkillsGrid";
+// import apolloClient from "../../../lib/apollo";
+// import {GetServerSideProps} from "next";
 
 const Skills = () => {
     const {data, error, loading} = useQuery(GetSkillsQuery)
     const [skills, setSkills] = useState([])
-    console.log(data, error, loading)
 
     useEffect(() => {
         if (data) {
@@ -19,8 +19,7 @@ const Skills = () => {
         }
     }, [data])
 
-    // if (loading) return <p>Loading...</p>
-    // if (error) return <p>Oops, something went wrong: {error.message}</p>
+    console.log(data)
 
     return (
         <div className={s.skills}>
@@ -28,9 +27,8 @@ const Skills = () => {
                 <GridWrapper>
                     <Sidebar/>
                     <div className={s.skillsGrid}>
-                        {!loading && !error && skills.map((s: Skill, i: number) =>
-                            <SkillItem skill={s} key={s.title + i}/>
-                        )}
+                        {/*<SkillsGrid skillsArray={data.skills} />*/}
+                        {!loading && !error && <SkillsGrid skillsArray={skills} />}
                         {loading && <p>Loading...</p>}
                         {error && <p>Oops, something went wrong: {error.message}</p>}
                     </div>
@@ -39,5 +37,17 @@ const Skills = () => {
         </div>
     );
 };
+
+// export const getServerSideProps: GetServerSideProps = async () => {
+//     const {data} = await apolloClient.query({
+//         query: GetSkillsQuery
+//     })
+//
+//     return {
+//         props: {
+//             data
+//         }
+//     }
+// }
 
 export default Skills;
