@@ -11,7 +11,6 @@ const schema = await buildSchema({
 
 const server = new ApolloServer({
     schema,
-
 })
 
 const startServer = server.start()

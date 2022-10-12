@@ -6,10 +6,10 @@ const prisma = new PrismaClient()
 const main = async () => {
     await prisma.user.create({
         data: {
-            email: "aaa@mail.aaa",
+            email: "ccc@mail.ccc",
             firstName: "aaa",
             secondName: "bbb",
-            role: 'ADMIN'
+            role: 'USER'
         }
     })
 
