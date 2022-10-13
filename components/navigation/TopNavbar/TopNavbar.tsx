@@ -18,22 +18,24 @@ const TopNavbar: React.FC<NavbarProps> = ({visibility = 'show'}) => {
 
     const watchScrollHandler = () => {
         const position = window.scrollY
-        if (position > 0 && position > scrollOffset) {
+        if (position > scrollOffset) {
             setVisibilityClass('show')
         }
-        if (position > 0 && position < scrollOffset) {
+        if (position < scrollOffset) {
             setVisibilityClass('hide')
         }
         if (position === 0) {
             setVisibilityClass('hide')
         }
 
-        setScrollOffset(position)
-        console.log(position)
+        setScrollOffset(() => scrollOffset)
+        console.log(position, scrollOffset)
     }
 
+    console.log(scrollOffset)
+
     useEffect(() => {
-        window.addEventListener('scroll', watchScrollHandler, {passive: true})
+        window.addEventListener('scroll', watchScrollHandler)
 
         if (visibility !== visibilityClass) {
             setVisibilityClass(visibility)

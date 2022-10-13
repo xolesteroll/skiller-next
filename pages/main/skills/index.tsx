@@ -32,7 +32,7 @@ const Skills = () => {
                     {loading && <p>Loading...</p>}
                     {error && <p>Oops, something went wrong: {error.message}</p>}
                 </div>
-                <TopNavbar />
+                <TopNavbar visibility={'hide'}/>
             </div>
 
         </GridWrapper>
