@@ -9,7 +9,7 @@ const Header = () => {
       <Container>
         <div className={s.headerInner}>
           <div className={s.headerLogo}>
-            <Link href="/pages">
+            <Link href="/">
               <a>
                 <img src={logo.src} alt="main site logo" />
               </a>
@@ -19,7 +19,7 @@ const Header = () => {
           <nav className={s.headerNav}>
             <ul className={s.headerNavMenu}>
               <li className={s.headerNavItem}>
-                <Link className={s.headerNavLink} href="/pages">
+                <Link className={s.headerNavLink} href="/">
                   Home
                 </Link>
               </li>

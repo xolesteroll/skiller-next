@@ -1,4 +1,11 @@
-@import './colors.module.scss';
+:root {
+  --main-bg      : #F7BF50;
+  --main-bg-hover: #ffdc98;
+  --main-text-color    : #000000;
+  --main-text-hover   : #ffffff;
+  --header-height: 138px;
+  --default-spacing: 15px;
+}
 
 @font-face {
   font-family: "Teko";
@@ -38,10 +45,10 @@ body {
   font-size  : 16px;
   line-height: 21px;
   font-weight: 400;
-  color: $main-text-color;
-  overflow-y: hidden;
-  max-height: 100vh;
-  height: 100%;
+  color: var(--main-text-color);
+  //overflow-y: hidden;
+  //max-height: 100vh;
+  //height: 100%;
 }
 
 a {
@@ -65,12 +72,21 @@ p {
 
 button {
   cursor: pointer;
+  font-family: "Teko";
 }
 
-.main-container {
-  max-width: 1200px;
-  margin   : 0 auto;
-  padding  : 0 15px;
+.dynamic-navbar {
+  position: sticky;
+  width: 100%;
+  bottom: 0;
+}
+
+.dynamic-navbar.hide {
+  transform: translateY(100%);
+}
+
+.dynamic-navbar.show {
+  transform: translateY(0);
 }
 
 @media (prefers-color-scheme: dark) {

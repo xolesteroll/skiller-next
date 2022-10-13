@@ -1,8 +1,8 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  row-gap: var(--default-spacing);
-  column-gap: var(--default-spacing);
+  row-gap: 15px;
+  column-gap: 15px;
   max-height: 100%;
   overflow-y: auto;
 }

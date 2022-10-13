@@ -1,6 +1,6 @@
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 3fr;
-  column-gap: 15px;
-  padding: 15px 0;
+  column-gap: var(--default-spacing);
+  //padding: 15px 0;
 }

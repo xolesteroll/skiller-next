@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import s from '../../../styles/Skills.module.scss'
-import Container from "../../../components/ui/Container/Container";
 import GridWrapper from "../../../components/ui/GridWrapper/GridWrapper";
 import Sidebar from "../../../components/ui/Sidebar/Sidebar";
 import {GetSkillsQuery} from "../../../src/graphql/queries/skills.queries";
 import {useQuery} from "@apollo/client";
 import SkillsGrid from "../../../components/skills/SkillsGrid/SkillsGrid";
-// import apolloClient from "../../../lib/apollo";
-// import {GetServerSideProps} from "next";
+import SkillsNav from "../../../components/navigation/SkillsNav/SkillsNav";
+import TopNavbar from "../../../components/navigation/TopNavbar/TopNavbar";
 
 const Skills = () => {
     const {data, error, loading} = useQuery(GetSkillsQuery)
@@ -15,26 +14,28 @@ const Skills = () => {
 
     useEffect(() => {
         if (data) {
-           setSkills(data.skills)
+            setSkills(data.skills)
         }
     }, [data])
 
     console.log(data)
 
     return (
-        <div className={s.skills}>
-            <Container>
-                <GridWrapper>
-                    <Sidebar/>
-                    <div className={s.skillsGrid}>
-                        {/*<SkillsGrid skillsArray={data.skills} />*/}
-                        {!loading && !error && <SkillsGrid skillsArray={skills} />}
-                        {loading && <p>Loading...</p>}
-                        {error && <p>Oops, something went wrong: {error.message}</p>}
-                    </div>
-                </GridWrapper>
-            </Container>
-        </div>
+        <GridWrapper>
+            <Sidebar>
+                <SkillsNav/>
+            </Sidebar>
+            <div>
+                <div className={s.skillsGrid}>
+                    {/*<SkillsGrid skillsArray={data.skills} />*/}
+                    {!loading && !error && <SkillsGrid skillsArray={skills}/>}
+                    {loading && <p>Loading...</p>}
+                    {error && <p>Oops, something went wrong: {error.message}</p>}
+                </div>
+                <TopNavbar />
+            </div>
+
+        </GridWrapper>
     );
 };
 
