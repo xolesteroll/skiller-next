@@ -28,7 +28,9 @@ const TopNavbar: React.FC<NavbarProps> = ({visibility = 'show'}) => {
             setVisibilityClass('hide')
         }
 
-        setScrollOffset(() => scrollOffset)
+        const newOffset = position
+
+        setScrollOffset(() => newOffset)
         console.log(position, scrollOffset)
     }
 
