@@ -7,10 +7,11 @@ import {useQuery} from "@apollo/client";
 import SkillsGrid from "../../../components/skills/SkillsGrid/SkillsGrid";
 import SkillsNav from "../../../components/navigation/SkillsNav/SkillsNav";
 import TopNavbar from "../../../components/navigation/TopNavbar/TopNavbar";
+import {Skill} from "../../../src/graphql/schema/skills/skills.typeDef";
 
 const Skills = () => {
     const {data, error, loading} = useQuery(GetSkillsQuery)
-    const [skills, setSkills] = useState([])
+    const [skills, setSkills] = useState<Skill[] | []>([])
 
     useEffect(() => {
         if (data) {
@@ -25,14 +26,14 @@ const Skills = () => {
             <Sidebar>
                 <SkillsNav/>
             </Sidebar>
-            <div>
+            <div className={"content-wrapper"}>
+                <TopNavbar visibility={"hide"}/>
                 <div className={s.skillsGrid}>
                     {/*<SkillsGrid skillsArray={data.skills} />*/}
                     {!loading && !error && <SkillsGrid skillsArray={skills}/>}
                     {loading && <p>Loading...</p>}
                     {error && <p>Oops, something went wrong: {error.message}</p>}
                 </div>
-                <TopNavbar visibility={'hide'}/>
             </div>
 
         </GridWrapper>
