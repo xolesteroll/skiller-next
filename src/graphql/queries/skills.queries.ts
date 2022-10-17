@@ -8,3 +8,11 @@ export const GetSkillsQuery = gql`
         }
     }
 `
+export const GetSkillByIdQuery = gql`
+    query SkillById($skillByIdId: String!) {
+        skillById(id: $skillByIdId) {
+            id
+            title
+        }
+    }
+`
