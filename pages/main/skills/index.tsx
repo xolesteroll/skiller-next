@@ -1,26 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import s from '../../../styles/Skills.module.scss'
 import GridWrapper from "../../../components/ui/GridWrapper/GridWrapper";
 import Sidebar from "../../../components/ui/Sidebar/Sidebar";
 import {GetSkillsQuery} from "../../../src/graphql/queries/skills.queries";
-import {useQuery} from "@apollo/client";
 import SkillsGrid from "../../../components/skills/SkillsGrid/SkillsGrid";
 import SkillsNav from "../../../components/navigation/SkillsNav/SkillsNav";
 import TopNavbar from "../../../components/navigation/TopNavbar/TopNavbar";
-import {Skill} from "../../../src/graphql/schema/skills/skills.typeDef";
+import apolloClient from "../../../lib/apollo";
+import {GetSkillsResponse} from "../../../src/types/skillResponse";
 
-const Skills = () => {
-    const {data, error, loading} = useQuery(GetSkillsQuery)
-    const [skills, setSkills] = useState<Skill[] | []>([])
-
-    useEffect(() => {
-        if (data) {
-            setSkills(data.skills)
-        }
-    }, [data])
-
-    console.log(data)
-
+const Skills: React.FC<GetSkillsResponse> = ({data}) => {
     return (
         <GridWrapper>
             <Sidebar>
@@ -29,16 +18,31 @@ const Skills = () => {
             <div className={"content-wrapper"}>
                 <TopNavbar visibility={"hide"}/>
                 <div className={s.skillsGrid}>
-                    {/*<SkillsGrid skillsArray={data.skills} />*/}
-                    {!loading && !error && <SkillsGrid skillsArray={skills}/>}
-                    {loading && <p>Loading...</p>}
-                    {error && <p>Oops, something went wrong: {error.message}</p>}
+                    <SkillsGrid skillsArray={data.skills}/>
+                    {/*/!*<SkillsGrid skillsArray={data.skills} />*!/*/}
+                    {/*{!loading && !error && <SkillsGrid skillsArray={skills}/>}*/}
+                    {/*{loading && <p>Loading...</p>}*/}
+                    {/*{error && <p>Oops, something went wrong: {error.message}</p>}*/}
                 </div>
             </div>
 
         </GridWrapper>
     );
 };
+
+export async function getStaticProps() {
+    const {data} = await apolloClient.query({
+        query: GetSkillsQuery
+    })
+
+    console.log(data)
+
+    return {
+        props: {
+            data
+        }
+    }
+}
 
 // export const getServerSideProps: GetServerSideProps = async () => {
 //     const {data} = await apolloClient.query({
