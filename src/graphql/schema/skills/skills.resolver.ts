@@ -26,21 +26,21 @@ export class SkillsResolver {
         return foundSkill
     }
 
-    // @Mutation()
-    // async createSkill(
-    //     @Arg("title") title: string
-    // ): Promise<Skill | null> {
-    //     try {
-    //         const newSkill = await prisma.skill.create({
-    //             data: {
-    //                 title
-    //             }
-    //         })
-    //
-    //         return newSkill
-    //
-    //     } catch (e: any) {
-    //         return null
-    //     }
-    // }
+    @Mutation(() => Skill)
+    async createSkill(
+        @Arg("title") title: string
+    ): Promise<Skill | null> {
+        try {
+            const newSkill = await prisma.skill.create({
+                data: {
+                    title
+                }
+            })
+
+            return newSkill
+
+        } catch (e: any) {
+            return null
+        }
+    }
 }
