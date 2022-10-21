@@ -1,4 +1,4 @@
-import {Arg, Query, Resolver} from "type-graphql";
+import {Arg, Mutation, Query, Resolver} from "type-graphql";
 import {Skill} from "./skills.typeDef";
 import {prisma} from "../../../../lib/prisma-global";
 
@@ -25,4 +25,22 @@ export class SkillsResolver {
         })
         return foundSkill
     }
+
+    // @Mutation()
+    // async createSkill(
+    //     @Arg("title") title: string
+    // ): Promise<Skill | null> {
+    //     try {
+    //         const newSkill = await prisma.skill.create({
+    //             data: {
+    //                 title
+    //             }
+    //         })
+    //
+    //         return newSkill
+    //
+    //     } catch (e: any) {
+    //         return null
+    //     }
+    // }
 }

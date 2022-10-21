@@ -3,6 +3,7 @@ import {GetSkillByIdQuery, GetSkillsQuery} from "../../../../src/graphql/queries
 import apolloClient from "../../../../lib/apollo";
 import {GetSkillByIdResponse} from "../../../../src/types/skillResponse";
 import {Skill} from "../../../../src/graphql/schema/skills/skills.typeDef";
+import GridWrapper from "../../../../components/ui/GridWrapper/GridWrapper";
 
 const SkillDetails: React.FC<GetSkillByIdResponse> = ({data}) => {
     // const router = useRouter()
@@ -14,11 +15,9 @@ const SkillDetails: React.FC<GetSkillByIdResponse> = ({data}) => {
     // console.log(data)
 
     return (
-        <div>
+        <GridWrapper>
             <p>{data.skillById.title}</p>
-            {/*{!loading && data && <p>{data.skillById.title}</p>}*/}
-            {/*SkillDetails*/}
-        </div>
+        </GridWrapper>
     );
 };
 

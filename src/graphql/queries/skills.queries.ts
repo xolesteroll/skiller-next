@@ -1,8 +1,8 @@
 import {gql} from "@apollo/client";
 
 export const GetSkillsQuery = gql`
-    query {
-        skills {
+    query Skills($amount: Float) {
+        skills(amount: $amount) {
             id
             title
         }

@@ -3,7 +3,16 @@ import {Skill} from "../graphql/schema/skills/skills.typeDef";
 export type GetSkillsResponse = {
     data: {
         skills: Skill[]
-    }
+    },
+    error: string
+}
+
+export type SkillsErrorResponse = {
+    data: {
+        skills: [],
+        error: string
+    },
+    error: string
 }
 
 export type GetSkillByIdResponse = {
@@ -12,12 +21,14 @@ export type GetSkillByIdResponse = {
             id: string,
             title: string
         }
-    }
+    },
+    error: string
 }
 
-export type SkillsErrorResponseType = {
+export type GetSkillByIdErrorResponse = {
     data: {
-        skills: [],
+        skillById: null
         error: string
     }
 }
+
