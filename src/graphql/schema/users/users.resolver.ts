@@ -1,5 +1,5 @@
 import {Query, Resolver} from "type-graphql";
-import {User} from "./users.typeDef";
+import {Role, User} from "./users.typeDef";
 
 @Resolver(User)
 export class UsersResolver {
@@ -11,7 +11,7 @@ export class UsersResolver {
                 email: 'first Skill',
                 firstName: "first",
                 secondName: "second",
-                role: "admin",
+                role: Role.ADMIN,
                 skills: [],
                 createdAt: new Date(),
                 updatedAt: new Date
@@ -21,7 +21,7 @@ export class UsersResolver {
                 email: 'second Skill',
                 firstName: "first",
                 secondName: "second",
-                role: "admin",
+                role: Role.ADMIN,
                 skills: [],
                 createdAt: new Date(),
                 updatedAt: new Date
@@ -36,7 +36,7 @@ export class UsersResolver {
             email: 'first Skill',
             firstName: "first",
             secondName: "second",
-            role: "admin",
+            role: Role.ADMIN,
             skills: [],
             createdAt: new Date(),
             updatedAt: new Date

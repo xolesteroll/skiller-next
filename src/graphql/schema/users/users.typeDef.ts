@@ -28,7 +28,7 @@ export class User {
     updatedAt: Date
 }
 
-enum Role {
+export enum Role {
     USER = "USER",
     SKILLER = "SKILLER",
     ADMIN = "ADMIN"

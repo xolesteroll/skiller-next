@@ -7,9 +7,10 @@ import SkillsGrid from "../../../components/skills/SkillsGrid/SkillsGrid";
 import SkillsNav from "../../../components/navigation/SkillsNav/SkillsNav";
 import TopNavbar from "../../../components/navigation/TopNavbar/TopNavbar";
 import apolloClient from "../../../lib/apollo";
-import {GetSkillsResponse} from "../../../src/types/skillResponse";
+import {GetSkillsResponse, SkillsErrorResponseType} from "../../../src/types/skillResponse";
 
-const Skills: React.FC<GetSkillsResponse> = ({data}) => {
+
+const Skills: React.FC<GetSkillsResponse | SkillsErrorResponseType> = ({data}) => {
     return (
         <GridWrapper>
             <Sidebar>
@@ -18,7 +19,9 @@ const Skills: React.FC<GetSkillsResponse> = ({data}) => {
             <div className={"content-wrapper"}>
                 <TopNavbar visibility={"hide"}/>
                 <div className={s.skillsGrid}>
-                    <SkillsGrid skillsArray={data.skills}/>
+                    {/*@ts-ignore*/}
+                    {data.error || <SkillsGrid skillsArray={data.skills}/>}
+
                     {/*/!*<SkillsGrid skillsArray={data.skills} />*!/*/}
                     {/*{!loading && !error && <SkillsGrid skillsArray={skills}/>}*/}
                     {/*{loading && <p>Loading...</p>}*/}
@@ -30,19 +33,61 @@ const Skills: React.FC<GetSkillsResponse> = ({data}) => {
     );
 };
 
-export async function getStaticProps() {
-    const {data} = await apolloClient.query({
-        query: GetSkillsQuery
-    })
+export async function getServerSideProps() {
+    try {
+        const {data} = await apolloClient.query({
+            query: GetSkillsQuery
+        })
 
-    console.log(data)
+        console.log(data)
 
-    return {
-        props: {
-            data
+        return {
+            props: {
+                data
+            }
+        }
+
+    } catch (e: any) {
+        return {
+            props: {
+                data: {
+                    skills: [],
+                    error: e.message
+                }
+            }
         }
     }
+
 }
+
+// export async function getStaticProps() {
+//     try {
+//         const {data} = await apolloClient.query({
+//             query: GetSkillsQuery
+//         })
+//
+//         console.log(data)
+//
+//         return {
+//             props: {
+//                 data
+//             },
+//             revalidate: 10
+//         }
+//
+//     } catch (e: any) {
+//         return {
+//             props: {
+//                 data: {
+//                     skills: [],
+//                     error: e.message
+//                 },
+//                 revalidate: 10
+//             }
+//         }
+//     }
+//
+// }
 
 // export const getServerSideProps: GetServerSideProps = async () => {
 //     const {data} = await apolloClient.query({
