@@ -2,6 +2,7 @@ import s from "./Header.module.scss";
 import logo from "../../../../public/images/skiller-logo-transparent.png";
 import Link from "next/link";
 import Container from "../../Container/Container";
+import Image from "next/image";
 
 const Header = () => {
   return (
@@ -11,6 +12,8 @@ const Header = () => {
           <div className={s.headerLogo}>
             <Link href="/">
               <a>
+                {/*<Image src={logo} width={150} height={57}  alt="main skiller logo"/>*/}
+
                 <img src={logo.src} alt="main site logo" />
               </a>
             </Link>
