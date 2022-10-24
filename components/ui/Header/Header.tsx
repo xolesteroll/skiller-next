@@ -1,7 +1,7 @@
 import s from "./Header.module.scss";
-import logo from "../../../../public/images/skiller-logo-transparent.png";
+import logo from "../../../public/images/skiller-logo-transparent.png";
 import Link from "next/link";
-import Container from "../../Container/Container";
+import Container from "../Container/Container";
 import Image from "next/image";
 
 const Header = () => {
