@@ -1,4 +1,5 @@
-import React, {ChangeEvent, Dispatch, SetStateAction, useState} from 'react';
+import React, {ChangeEvent, Dispatch, FormEventHandler, SetStateAction, useState} from 'react';
+import {signIn} from "next-auth/react";
 
 const AuthForm = () => {
     const [enteredUsername, setEnteredUsername] = useState<string>("")
@@ -17,18 +18,24 @@ const AuthForm = () => {
         setter(value)
     }
 
-    const onSubmitHandler = () => {
+    const onSubmitHandler: FormEventHandler<HTMLFormElement> = async (e) => {
+        e.preventDefault()
         const submittedData = {
             username: enteredUsername,
             password: enteredPassword
         }
 
-        console.log(submittedData)
+        const res = await signIn('credentials', {
+            username: enteredUsername,
+            password: enteredPassword
+        });
+
+        console.log(res)
     }
 
 
     return (
-        <form onSubmit={onSubmitHandler}>
+        <form onSubmit={(e) => onSubmitHandler(e)}>
             <div>
                 <label htmlFor="user-name">Username</label>
                 <input

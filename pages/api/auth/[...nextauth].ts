@@ -19,15 +19,18 @@ const authOptions: NextAuthOptions = {
                 }
             },
             async authorize(
-                credentials: Record<never, string> | undefined,
+                credentials: any,
                 req: Pick<RequestInternal, "body" | "query" | "headers" | "method">
             ) {
                 const {username, password} = credentials
-
+                console.log(username, password)
                 return null
             }
         })
-    ]
+    ],
+    pages: {
+        signIn: '/auth'
+    }
 }
 
 export default NextAuth(authOptions)

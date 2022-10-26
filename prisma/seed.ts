@@ -1,15 +1,14 @@
 import {PrismaClient} from "@prisma/client"
 import {DUMMY_SKILLS} from "../data/skills"
+import {Role} from "../src/graphql/schema/users/users.typeDef";
 
 const prisma = new PrismaClient()
 
 const main = async () => {
     await prisma.user.create({
         data: {
-            email: "aaa@mail.aaa",
-            firstName: "aaa",
-            secondName: "bbb",
-            role: 'USER'
+            username: "aaa@mail.aaa",
+            password: "aaa",
         }
     })
 

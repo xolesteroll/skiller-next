@@ -10,16 +10,16 @@ export class User {
     email: string
 
     @Field()
-    firstName: string
+    username: string
 
     @Field()
-    secondName: string
+    password: string
 
     @Field()
     role: Role
 
-    @Field()
-    skills: Skill[] | []
+    @Field({ nullable: true })
+    skills?: Skill[]
 
     @Field()
     createdAt: Date
