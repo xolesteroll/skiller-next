@@ -4,9 +4,10 @@ import { MicroRequest } from "apollo-server-micro/dist/types";
 import { ServerResponse, IncomingMessage } from "http";
 import {buildSchema} from "type-graphql";
 import {SkillsResolver} from "../../src/graphql/schema/skills/skills.resolver";
+import {UsersResolver} from "../../src/graphql/schema/users/users.resolver";
 
 const schema = await buildSchema({
-    resolvers: [SkillsResolver]
+    resolvers: [SkillsResolver, UsersResolver]
 })
 
 const server = new ApolloServer({

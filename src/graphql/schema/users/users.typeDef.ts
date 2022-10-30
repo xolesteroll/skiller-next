@@ -1,30 +1,31 @@
-import {Field, ID, InputType, ObjectType} from "type-graphql";
+import {Field, ID, ObjectType} from "type-graphql";
 import {Skill} from "../skills/skills.typeDef";
+import {Enum} from "@apollo/protobufjs";
 
 @ObjectType()
 export class User {
     @Field(() => ID)
     id: string
 
-    @Field()
+    @Field(() => String)
     email: string
 
-    @Field()
+    @Field(() => String, {nullable: true})
     username: string
 
-    @Field()
+    @Field(() => String)
     password: string
 
     @Field()
     role: Role
 
-    @Field({ nullable: true })
-    skills?: Skill[]
+    @Field(() => [Skill], {nullable: true})
+    skills: [Skill]
 
-    @Field()
+    @Field(() => Date)
     createdAt: Date
 
-    @Field()
+    @Field(() => Date)
     updatedAt: Date
 }
 

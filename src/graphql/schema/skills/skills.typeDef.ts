@@ -5,7 +5,7 @@ export class Skill {
     @Field(() => ID)
     id: string
 
-    @Field()
+    @Field(() => String)
     title: string
     //
     // @Field()

@@ -1,3 +1,4 @@
+import "reflect-metadata"
 import {Arg, Mutation, Query, Resolver} from "type-graphql";
 import {Role, User} from "./users.typeDef";
 
@@ -45,19 +46,22 @@ export class UsersResolver {
 
     @Mutation(() => User)
     async registerUser(
-        @Arg("username") username: string,
+        @Arg("email") email: string,
         @Arg("password") password: string
     ): Promise<User | null> {
         try {
             const newUser = await prisma.user.create({
                 data: {
-                    username,
+                    email,
                     password
                 }
             })
+            // console.log(newUser)
 
+            // @ts-ignore
             return newUser
-        } catch (e:any) {
+
+        } catch (e: any) {
             console.log(e.message)
             return null
         }

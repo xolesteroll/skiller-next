@@ -9,9 +9,9 @@ const authOptions: NextAuthOptions = {
         CredentialsProvider({
             type: 'credentials',
             credentials: {
-                username: {
-                    label: 'Username',
-                    type: 'text',
+                email: {
+                    label: 'Email',
+                    type: 'email',
                 },
                 password: {
                     label: 'Password',
@@ -22,12 +22,30 @@ const authOptions: NextAuthOptions = {
                 credentials: any,
                 req: Pick<RequestInternal, "body" | "query" | "headers" | "method">
             ) {
-                const {username, password} = credentials
-                console.log(username, password)
-                return null
+                const {email, password} = credentials
+                const foundUser = await prisma.user.findFirst({
+                    where: {
+                        email
+                    }
+                })
+
+                if (foundUser) {
+                    if (foundUser.password === password) {
+                        return foundUser
+                    } else {
+                        return null
+                    }
+                } else {
+                    return null
+                }
             }
         })
     ],
+    callbacks: {
+      async redirect({url, baseUrl}) {
+          return baseUrl + '/main/skills'
+      }
+    },
     pages: {
         signIn: '/auth'
     }

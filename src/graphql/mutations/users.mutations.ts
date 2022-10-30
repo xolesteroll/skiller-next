@@ -1,10 +1,11 @@
 import {gql} from "@apollo/client";
 
 export const RegisterUser = gql`
-    mutation RegisterUserMutation($username: String!, $password: String!) {
-        createSkill(username: $username, password: $password) {
+    mutation RegisterUserMutation($email: String!, $password: String!) {
+        registerUser(email: $email, password: $password) {
             id
-            title
+            email
+            username
         }
     }
 `
