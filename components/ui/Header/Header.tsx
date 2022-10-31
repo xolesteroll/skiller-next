@@ -3,8 +3,14 @@ import logo from "../../../public/images/skiller-logo-transparent.png";
 import Link from "next/link";
 import Container from "../Container/Container";
 import Image from "next/image";
+import {signOut, useSession} from "next-auth/react";
+import {useState} from "react";
+import {signout} from "next-auth/core/routes";
 
 const Header = () => {
+  const session = useSession()
+  const [authStatus, setAuthStatus] = useState(session.status)
+  console.log(authStatus)
   return (
     <header className={s.header}>
       <Container>
@@ -37,24 +43,31 @@ const Header = () => {
                 </Link>
               </li>
               <li className={s.headerNavItem}>
-                <Link className={s.headerNavLink} href="/main/skills">
+                <Link className={s.headerNavLink} href="/skills">
                   Skills
                 </Link>
               </li>
             </ul>
           </nav>
-
           <div className={s.headerControls}>
             <ul className={s.headerControlsAuth}>
-              <li>
-                <Link href="/auth">Sign In / Sign Up</Link>
-              </li>
-              <li>
-                <Link href="/account">My account</Link>
-              </li>
-              <li>
-                <button type="button">Logout</button>
-              </li>
+              {
+                authStatus !== 'authenticated' ?
+                    <>
+                      <li>
+                        <Link href="/auth">Sign In / Sign Up</Link>
+                      </li>
+                      <li>
+                        <Link href="/account">My account</Link>
+                      </li>
+                    </>
+                     :
+                <li>
+                <button type="button" onClick={() => signOut()}>Logout</button>
+                </li>
+              }
+
+
             </ul>
           </div>
         </div>

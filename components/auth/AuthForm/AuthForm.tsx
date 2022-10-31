@@ -38,7 +38,7 @@ const AuthForm = () => {
                 variables: submittedData
             })
         }
-            console.log(response)
+            console.log(JSON.stringify(response))
 
     }
 

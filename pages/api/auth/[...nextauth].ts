@@ -1,5 +1,8 @@
 import NextAuth, {NextAuthOptions, RequestInternal} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import {PrismaClient} from "@prisma/client";
+
+const prisma = new PrismaClient()
 
 const authOptions: NextAuthOptions = {
     session: {
@@ -22,28 +25,30 @@ const authOptions: NextAuthOptions = {
                 credentials: any,
                 req: Pick<RequestInternal, "body" | "query" | "headers" | "method">
             ) {
-                const {email, password} = credentials
-                const foundUser = await prisma.user.findFirst({
-                    where: {
-                        email
-                    }
-                })
+                try {
+                    const {email, password} = credentials
+                    const foundUser = await prisma.user.findFirst({
+                        where: {
+                            email
+                        }
+                    })
 
-                if (foundUser) {
-                    if (foundUser.password === password) {
-                        return foundUser
-                    } else {
+                    if (!foundUser || foundUser.password !== password) {
                         return null
                     }
-                } else {
+
+                    return foundUser
+                } catch (e: any) {
+                    console.log(e.message)
                     return null
                 }
+
             }
         })
     ],
     callbacks: {
       async redirect({url, baseUrl}) {
-          return baseUrl + '/main/skills'
+          return baseUrl + '/skills'
       }
     },
     pages: {

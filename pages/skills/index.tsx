@@ -1,10 +1,10 @@
 import React from 'react';
-import s from '../../../styles/Skills.module.scss'
-import GridWrapper from "../../../components/ui/GridWrapper/GridWrapper";
-import {GetSkillsQuery} from "../../../src/graphql/queries/skills.queries";
-import SkillsGrid from "../../../components/skills/SkillsGrid/SkillsGrid";
-import apolloClient from "../../../lib/apollo";
-import {GetSkillsResponse, SkillsErrorResponse} from "../../../src/types/skillResponse";
+import s from '../../styles/Skills.module.scss'
+import GridWrapper from "../../components/ui/GridWrapper/GridWrapper";
+import {GetSkillsQuery} from "../../src/graphql/queries/skills.queries";
+import SkillsGrid from "../../components/skills/SkillsGrid/SkillsGrid";
+import apolloClient from "../../lib/apollo";
+import {GetSkillsResponse, SkillsErrorResponse} from "../../src/types/skillResponse";
 
 
 const Skills: React.FC<GetSkillsResponse | SkillsErrorResponse> = ({data}) => {
