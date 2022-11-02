@@ -4,8 +4,9 @@ import apolloClient from "../../../lib/apollo";
 import {GetSkillByIdResponse} from "../../../src/types/skillResponse";
 import {Skill} from "../../../src/graphql/schema/skills/skills.typeDef";
 import GridWrapper from "../../../components/ui/GridWrapper/GridWrapper";
+import {prisma} from "../../../lib/prisma-global";
 
-const SkillDetails: React.FC<GetSkillByIdResponse> = ({data}) => {
+const SkillDetails: React.FC<{data: Skill}> = ({data} ) => {
     // const router = useRouter()
     // const skillId = router.query.skillId
     //
@@ -14,19 +15,22 @@ const SkillDetails: React.FC<GetSkillByIdResponse> = ({data}) => {
     // })
     // console.log(data)
 
+
     return (
         <GridWrapper>
-            <p>{data.skillById.title}</p>
+            <p>{data.title}</p>
         </GridWrapper>
     );
 };
 
 export async function getStaticPaths() {
-    const {data} = await apolloClient.query({
-        query: GetSkillsQuery
-    })
+    // const {data} = await apolloClient.query({
+    //     query: GetSkillsQuery
+    // })
 
-    const skillsIds = data.skills.map((s: Skill) => {
+    const skills = await prisma.skill.findMany()
+
+    const skillsIds = skills.map((s: Skill) => {
         return {
             params: {
                 skillId: s.id
@@ -41,16 +45,22 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(ctx: any) {
-    const {data} = await apolloClient.query({
-        query: GetSkillByIdQuery,
-        variables: {
-            skillByIdId: ctx.params.skillId
+    const data = await prisma.skill.findUnique({
+        where: {
+            id: ctx.params.skillId
         }
     })
+    // const {data} = await apolloClient.query({
+    //     query: GetSkillByIdQuery,
+    //     variables: {
+    //         skillByIdId: ctx.params.skillId
+    //     }
+    // })
+
 
     return {
         props: {
-            data: ctx.data
+            data
         }
     }
 }
