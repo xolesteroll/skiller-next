@@ -1,9 +1,9 @@
 import React from 'react';
-import {GetSkillByIdQuery, GetSkillsQuery} from "../../../../src/graphql/queries/skills.queries";
-import apolloClient from "../../../../lib/apollo";
-import {GetSkillByIdResponse} from "../../../../src/types/skillResponse";
-import {Skill} from "../../../../src/graphql/schema/skills/skills.typeDef";
-import GridWrapper from "../../../../components/ui/GridWrapper/GridWrapper";
+import {GetSkillByIdQuery, GetSkillsQuery} from "../../../src/graphql/queries/skills.queries";
+import apolloClient from "../../../lib/apollo";
+import {GetSkillByIdResponse} from "../../../src/types/skillResponse";
+import {Skill} from "../../../src/graphql/schema/skills/skills.typeDef";
+import GridWrapper from "../../../components/ui/GridWrapper/GridWrapper";
 
 const SkillDetails: React.FC<GetSkillByIdResponse> = ({data}) => {
     // const router = useRouter()
@@ -41,8 +41,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(ctx: any) {
-    console.log(ctx)
-
     const {data} = await apolloClient.query({
         query: GetSkillByIdQuery,
         variables: {
@@ -50,11 +48,9 @@ export async function getStaticProps(ctx: any) {
         }
     })
 
-    console.log(data)
-
     return {
         props: {
-            data
+            data: ctx.data
         }
     }
 }
