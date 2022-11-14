@@ -9,7 +9,7 @@ import {prisma} from "../../lib/prisma-global";
 
 
 const Skills: React.FC<GetSkillsResponse | SkillsErrorResponse> = ({data}) => {
-    console.log(data)
+
     return (
         <GridWrapper>
             <div className={s.skillsGrid}>
@@ -28,7 +28,6 @@ const Skills: React.FC<GetSkillsResponse | SkillsErrorResponse> = ({data}) => {
 export async function getServerSideProps() {
     try {
         const skills = await prisma.skill.findMany()
-        console.log(skills)
 
         return {
             props: {

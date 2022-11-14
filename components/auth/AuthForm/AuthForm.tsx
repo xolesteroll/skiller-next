@@ -8,7 +8,7 @@ const AuthForm = () => {
     const [enteredPassword, setEnteredPassword] = useState<string>("")
     const [isLogin, setIsLogin] = useState<boolean>(true)
 
-    const[createUser, {data, loading, error}]= useMutation(RegisterUser)
+    const [createUser, {data, loading, error}]= useMutation(RegisterUser)
 
     const onAuthModeChangeHandler = () => {
         setIsLogin(prevState => !prevState)
@@ -38,7 +38,6 @@ const AuthForm = () => {
                 variables: submittedData
             })
         }
-            console.log(JSON.stringify(response))
 
     }
 

@@ -32,7 +32,7 @@ const authOptions: NextAuthOptions = {
                             email
                         }
                     })
-
+                    console.log(foundUser)
                     if (!foundUser || foundUser.password !== password) {
                         return null
                     }
