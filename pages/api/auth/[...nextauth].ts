@@ -2,6 +2,11 @@ import NextAuth, {NextAuthOptions, RequestInternal} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import {PrismaClient} from "@prisma/client";
 
+interface LoginCredentials {
+    email: string
+    password: string
+}
+
 const prisma = new PrismaClient()
 
 const authOptions: NextAuthOptions = {
@@ -22,7 +27,7 @@ const authOptions: NextAuthOptions = {
                 }
             },
             async authorize(
-                credentials: any,
+                credentials: LoginCredentials,
                 req: Pick<RequestInternal, "body" | "query" | "headers" | "method">
             ) {
                 try {
