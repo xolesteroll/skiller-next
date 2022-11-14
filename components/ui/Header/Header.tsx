@@ -11,11 +11,10 @@ const Header = () => {
 
   useEffect(() => {
     setAuthStatus(status)
+    console.log('setstatus')
   }, [status])
 
-  if (status === 'loading') {
-    return <p>Loading...</p>
-  }
+  console.log(status)
 
   return (
     <header className={s.header}>
@@ -68,9 +67,15 @@ const Header = () => {
                       </li>
                     </>
                      :
-                <li>
-                <button type="button" onClick={() => signOut()}>Logout</button>
-                </li>
+                    <>
+                      <li>
+                        <p>Logged in as: {session.user.email}</p>
+                      </li>
+                      <li>
+                        <button type="button" onClick={() => signOut()}>Logout</button>
+                      </li>
+                    </>
+
               }
             </ul>
           </div>

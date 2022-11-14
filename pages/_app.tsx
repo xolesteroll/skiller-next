@@ -11,8 +11,9 @@ import {Session} from "next-auth";
 function MyApp({Component, pageProps}: AppProps<{
     session: Session;
 }>) {
+
     return (
-        <SessionProvider session={pageProps.session}>
+        <SessionProvider session={pageProps.session} >
             <ApolloProvider client={apolloClient}>
                 <Head>
                     <title>Skiller Appsss</title>

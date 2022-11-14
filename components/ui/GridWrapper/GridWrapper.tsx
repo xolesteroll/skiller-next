@@ -9,7 +9,6 @@ import SkillsGrid from "../../skills/SkillsGrid/SkillsGrid";
 
 const GridWrapper = (props: ComponentProps<any>) => {
     return (
-        <Container>
             <div className={s.wrapper}>
                 <Sidebar>
                     <SkillsNav/>
@@ -19,7 +18,6 @@ const GridWrapper = (props: ComponentProps<any>) => {
                     {props.children}
                 </div>
             </div>
-        </Container>
     );
 };
 
