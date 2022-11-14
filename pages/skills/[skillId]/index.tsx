@@ -1,7 +1,4 @@
 import React from 'react';
-import {GetSkillByIdQuery, GetSkillsQuery} from "../../../src/graphql/queries/skills.queries";
-import apolloClient from "../../../lib/apollo";
-import {GetSkillByIdResponse} from "../../../src/types/skillResponse";
 import {Skill} from "../../../src/graphql/schema/skills/skills.typeDef";
 import GridWrapper from "../../../components/ui/GridWrapper/GridWrapper";
 import {prisma} from "../../../lib/prisma-global";

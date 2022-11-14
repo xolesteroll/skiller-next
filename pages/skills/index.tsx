@@ -5,10 +5,11 @@ import {GetSkillsQuery} from "../../src/graphql/queries/skills.queries";
 import SkillsGrid from "../../components/skills/SkillsGrid/SkillsGrid";
 import apolloClient from "../../lib/apollo";
 import {GetSkillsResponse, SkillsErrorResponse} from "../../src/types/skillResponse";
+import {prisma} from "../../lib/prisma-global";
 
 
 const Skills: React.FC<GetSkillsResponse | SkillsErrorResponse> = ({data}) => {
-
+    console.log(data)
     return (
         <GridWrapper>
             <div className={s.skillsGrid}>
@@ -26,15 +27,15 @@ const Skills: React.FC<GetSkillsResponse | SkillsErrorResponse> = ({data}) => {
 
 export async function getServerSideProps() {
     try {
-        const {data} = await apolloClient.query({
-            query: GetSkillsQuery
-        })
-
-        console.log(data)
+        const skills = await prisma.skill.findMany()
+        console.log(skills)
 
         return {
             props: {
-                data
+                data: {
+                    skills,
+                    error: null
+                }
             }
         }
 
