@@ -6,6 +6,7 @@ import SkillsGrid from "../../components/skills/SkillsGrid/SkillsGrid";
 import apolloClient from "../../lib/apollo";
 import {GetSkillsResponse, SkillsErrorResponse} from "../../src/types/skillResponse";
 import {prisma} from "../../lib/prisma-global";
+import {getSession} from "next-auth/react";
 
 
 const Skills: React.FC<GetSkillsResponse | SkillsErrorResponse> = ({data}) => {
@@ -25,8 +26,19 @@ const Skills: React.FC<GetSkillsResponse | SkillsErrorResponse> = ({data}) => {
     );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps(ctx) {
     try {
+        const session = await getSession(ctx)
+
+        if (!session) {
+            return {
+                redirect: {
+                    destination: '/auth',
+                    permanent: false
+                }
+            }
+        }
+
         const skills = await prisma.skill.findMany()
 
         return {
