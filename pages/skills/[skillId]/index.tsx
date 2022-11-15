@@ -2,6 +2,7 @@ import React from 'react';
 import {Skill} from "../../../src/graphql/schema/skills/skills.typeDef";
 import GridWrapper from "../../../components/ui/GridWrapper/GridWrapper";
 import {prisma} from "../../../lib/prisma-global";
+import {getSession} from "next-auth/react";
 
 const SkillDetails: React.FC<{data: Skill}> = ({data} ) => {
     // const router = useRouter()
@@ -42,6 +43,17 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(ctx: any) {
+    const session = await getSession(ctx)
+
+    if (!session) {
+        return {
+            redirect: {
+                destination: '/auth',
+                permanent: false
+            }
+        }
+    }
+
     const data = await prisma.skill.findUnique({
         where: {
             id: ctx.params.skillId
