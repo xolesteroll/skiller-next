@@ -50,6 +50,7 @@ export class UsersResolver {
         @Arg("password") password: string
     ): Promise<User | null> {
         try {
+            console.log(email, password)
             const newUser = await prisma.user.create({
                 data: {
                     email,

@@ -8,7 +8,7 @@ const AuthForm = () => {
     const [enteredPassword, setEnteredPassword] = useState<string>("")
     const [isLogin, setIsLogin] = useState<boolean>(true)
 
-    const [createUser, {data, loading, error}]= useMutation(RegisterUser)
+    const [registerUser, {data, loading, error}] = useMutation(RegisterUser)
 
     const onAuthModeChangeHandler = () => {
         setIsLogin(prevState => !prevState)
@@ -30,16 +30,22 @@ const AuthForm = () => {
         }
 
         let response
-        
+
         if (isLogin) {
             response = await signIn('credentials', submittedData);
         } else {
-            response = await createUser({
+            console.log(submittedData)
+            response = await registerUser({
                 variables: submittedData
             })
         }
 
+        console.log(response)
+
     }
+
+    if (loading) return <p>Loading...</p>
+    if (error) return <p>Something is wrong</p>
 
 
     return (
