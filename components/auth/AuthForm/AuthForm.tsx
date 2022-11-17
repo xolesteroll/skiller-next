@@ -1,5 +1,5 @@
 import React, {ChangeEvent, Dispatch, FormEventHandler, SetStateAction, useState} from 'react';
-import {signIn} from "next-auth/react";
+import {signIn, useSession} from "next-auth/react";
 import {useMutation} from "@apollo/client";
 import {RegisterUser} from "../../../src/graphql/mutations/users.mutations";
 
@@ -7,6 +7,8 @@ const AuthForm = () => {
     const [enteredEmail, setEnteredEmail] = useState<string>("")
     const [enteredPassword, setEnteredPassword] = useState<string>("")
     const [isLogin, setIsLogin] = useState<boolean>(true)
+
+    const session = useSession()
 
     const [registerUser, {data, loading, error}] = useMutation(RegisterUser)
 
@@ -72,7 +74,8 @@ const AuthForm = () => {
 
             <div>
                 <button type="submit">
-                    {isLogin ? "Sign In" : "Sign Up"}
+                    {isLogin && session.status !== "loading" ? "Sign In" : "Sign Up"}
+                    {session.status === "loading" ?? "Loading..."}
                 </button>
             </div>
 

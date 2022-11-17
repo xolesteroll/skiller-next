@@ -3,6 +3,7 @@ import Header from "../Header/Header";
 import Spacer from "../Spacer/Spacer";
 import {useSession} from "next-auth/react";
 import Container from "../Container/Container";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 
 const Layout = (props: ComponentProps<any>) => {
@@ -14,9 +15,7 @@ const Layout = (props: ComponentProps<any>) => {
             <Spacer height={'15px'} backgroundColor={'#ffffff'} />
             <main className="main">
                 <Container >
-                    {
-                        status === 'loading' ? <p>Logging you in</p> : props.children
-                    }
+                    {props.children}
                 </Container>
 
             </main>

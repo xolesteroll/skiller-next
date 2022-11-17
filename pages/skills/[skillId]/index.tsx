@@ -2,8 +2,9 @@ import React from 'react';
 import {Skill} from "../../../src/graphql/schema/skills/skills.typeDef";
 import GridWrapper from "../../../components/ui/GridWrapper/GridWrapper";
 import {prisma} from "../../../lib/prisma-global";
+import Card from "../../../components/ui/Card/Card";
 
-const SkillDetails: React.FC<{data: Skill}> = ({data} ) => {
+const SkillDetails: React.FC<{ data: Skill }> = ({data}) => {
     // const router = useRouter()
     // const skillId = router.query.skillId
     //
@@ -15,7 +16,9 @@ const SkillDetails: React.FC<{data: Skill}> = ({data} ) => {
 
     return (
         <GridWrapper>
-            <p>{data.title}</p>
+            <Card>
+                <p>{data.title}</p>
+            </Card>
         </GridWrapper>
     );
 };
